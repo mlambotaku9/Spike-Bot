@@ -1,1 +1,1 @@
-node spike.js
+web: node spike.js
