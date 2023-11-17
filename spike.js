@@ -5,7 +5,7 @@ const { Sticker, createSticker, StickerTypes } = require('wa-sticker-formatter')
 const util = require("util");
 const { useMultiFileAuthState, jidDecode, makeInMemoryStore, DisconnectReason, fetchLatestBaileysVersion } = require("@whiskeysockets/baileys");
 const logger = require("@whiskeysockets/baileys/lib/Utils/logger").default;
-const { Pino, pino } = require("pino");
+const Pino = require("pino");
 const gp = ["254762974923"];
 const fs = require("fs");
 const figlet = require("figlet");
@@ -26,13 +26,7 @@ const color = (text, color) => {
 };
 
 
-// const { Socket } = Extra;
-global.store = makeInMemoryStore({
-  logger: pino().child({
-    level: 'silent',
-    stream: 'store'
-  })
-});
+const store = makeInMemoryStore({ logger: Pino({ level: "fatal" }).child({ level: "fatal" }) })
 
 const usePairingCode = !!global.pairingNum || process.argv.includes('--use-pairing-code')
 const useMobile = process.argv.includes('--mobile')
