@@ -1,16 +1,4 @@
 {
-  "name": "spike",
-  "version": "1.0.0",
-  "description": "A simple code for auto-status view and presence update",
-  "main": "spike.js",
-  "scripts": {
-    "test": "node spike.js"
-  },
-  "keywords": [
-    "spike"
-  ],
-  "author": "moha",
-  "license": "ISC"
   "dependencies": {
     "@adiwajshing/keyed-db": "^0.2.4",
     "@whiskeysockets/baileys": "latest",
@@ -28,7 +16,7 @@
     "qrcode-terminal": "^0.12.0",
     "spinnies": "^0.5.1",
     "util": "^0.12.5",
-    "wikipedia": "^2.1.0"
-    "wa-sticker-formatter": "^4.4.4",
- }
+    "wikipedia": "^2.1.0",
+    "wa-sticker-formatter": "^4.4.4"
+  }
 }
