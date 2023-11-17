@@ -6,6 +6,7 @@ const util = require("util");
 const { useMultiFileAuthState, jidDecode, makeInMemoryStore, DisconnectReason, fetchLatestBaileysVersion } = require("@whiskeysockets/baileys");
 const logger = require("@whiskeysockets/baileys/lib/Utils/logger").default;
 const pino = require("pino");
+const readline = require("readline");
 const gp = ["254762974923"];
 const fs = require("fs");
 const figlet = require("figlet");
