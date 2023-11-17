@@ -228,39 +228,42 @@ await sock.updateProfileStatus(status);
     } else return jid;
   };
 
-  sock.ev.on('connection.update', async (update) => {
-    const {
-      connection,
-      lastDisconnect,
-      qr
-    } = update;
-    if (lastDisconnect == 'undefined' && qr != 'undefined') {
-      qrcode.generate(qr, {
-        small: true
-      });
-    }
-    if (connection === 'connecting') {
-      spinnies.add('start', {
-        text: 'Connecting Now. . .'
-      });
-    } else if (connection === 'open') {
-      spinnies.succeed('start', {
-        text: `Successfully Connected. You have logged in as ${sock.user.name}`
-      });
-    } else if (connection === 'close') {
-      if (lastDisconnect.error.output.statusCode == DisconnectReason.loggedOut) {
-        spinnies.fail('start', {
-          text: `Can't connect!`
-        });
-
-        process.exit(0);
+  sock.ev.on("connection.update", async (update) => {
+    const { connection, lastDisconnect } = update;
+    if (connection === "close") {
+      let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
+      if (reason === DisconnectReason.badSession) {
+        console.log(` ♻️ Bad Session File, Please Delete Session and Scan Again`);
+        process.exit();
+      } else if (reason === DisconnectReason.connectionClosed) {
+        console.log(" ⚕️ Connection closed, reconnecting....");
+        startlogic();
+      } else if (reason === DisconnectReason.connectionLost) {
+        console.log(" 👮 Connection Lost from Server, reconnecting...");
+        startlogic();
+      } else if (reason === DisconnectReason.connectionReplaced) {
+        console.log(" 🏊 Connection Replaced, Another New Session Opened, Please Restart Bot");
+        process.exit();
+      } else if (reason === DisconnectReason.loggedOut) {
+        console.log(` 🔐 Device Logged Out, Please Delete File creds.json and Scan Again.`);
+        process.exit();
+      } else if (reason === DisconnectReason.restartRequired) {
+        console.log(" ♻️ Restart Required, Restarting...");
+        startlogic();
+      } else if (reason === DisconnectReason.timedOut) {
+        console.log(" 🔌 Connection TimedOut, Reconnecting...");
+        startlogic();
       } else {
-        main().catch(() => main());
+        console.log(` 🥶 Unknown DisconnectReason: ${reason}|${connection}`);
+        startspike();
       }
+    } else if (connection === "open") {
+      console.log(color(" 🍃 Congrats, Logic has successfully connected to this server", "green"));
+      console.log(color("Follow me on GitHub as mohalicious", "purple"));
+      console.log(color("Text the bot number with !menu to check my command list"));
+      
     }
+    // console.log('Connected...', update)
   });
 
-  sock.ev.on('creds.update', saveCreds);
-};
-
-main();
+  sock.ev.on("creds.update", saveCreds);
