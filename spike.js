@@ -1,6 +1,6 @@
 require('./config')
 const makeWASocket = require("@whiskeysockets/baileys").default;
-const { BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, proto, generateWAMessageContent, generateWAMessage, prepareWAMessageMedia, areJidsSameUser, getContentType } = require("@whiskeysockets/baileys");
+const { BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, proto, generateWAMessageContent, generateWAMessage, prepareWAMessageMedia, areJidsSameUser, getContentType, PHONENUMBER_MCC, makeCacheableSignalKeyStore, WAMessageKey } = require("@whiskeysockets/baileys");
 const { Sticker, createSticker, StickerTypes } = require('wa-sticker-formatter');
 const util = require("util");
 const { useMultiFileAuthState, jidDecode, makeInMemoryStore, DisconnectReason, fetchLatestBaileysVersion } = require("@whiskeysockets/baileys");
