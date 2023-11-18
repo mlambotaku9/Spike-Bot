@@ -1,7 +1,7 @@
 const fs = require('fs')
 const chalk = require('chalk')
 
-global.pairingNum = "254762974923"
+global.pairingNum = ""
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
