@@ -279,6 +279,6 @@ async function askOTP() {
   });
 
   sock.ev.on('creds.update', saveCreds);
-};
+});
 
 main();
