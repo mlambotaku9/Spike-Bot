@@ -222,19 +222,21 @@ async function askOTP() {
     const groupMetadata = m.isGroup ? await sock.groupMetadata(m.chat).catch((e) => {}) : "";
     const groupName = m.isGroup ? groupMetadata.subject : "";
 
-    if (!m.message) return;
-
-    if (m.chat.endsWith('@s.whatsapp.net')) {
-              sock.sendPresenceUpdate('recording', m.chat)
-    }      if (m.chat.endsWith('broadcast')) {
-    sock.readMessages([m.key]);
     if (!m.isGroup) {
  client.sendPresenceUpdate('recording', m.chat);
-      const status = 'life<LifeMotive[]>(memories.map(x => x.data))'
-await sock.updateProfileStatus(status);
+ console.log(chalk.black(chalk.bgWhite("[ SPIKE-AI ]")), color(argsLog, "turquoise"), chalk.magenta("From"), chalk.green(pushname), chalk.yellow(`[ ${m.sender.replace("@s.whatsapp.net", "")} ]`))
+    } else if (m.isGroup) {
+  client.sendPresenceUpdate('recording', m.chat);
+      console.log(
+        chalk.black(chalk.bgWhite("[ LOGS ]")),
+        color(argsLog, "turquoise"),
+        chalk.magenta("From"),
+        chalk.green(pushname),
+        chalk.yellow(`[ ${m.sender.replace("@s.whatsapp.net", "")} ]`),
+        chalk.blueBright("IN"),
+        chalk.green(groupName)
+      );
     }
-
-  });
 
     sock.decodeJid = (jid) => {
     if (!jid) return jid;
