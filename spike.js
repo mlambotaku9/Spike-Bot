@@ -223,10 +223,10 @@ async function askOTP() {
     const groupName = m.isGroup ? groupMetadata.subject : "";
 
     if (!m.isGroup) {
- client.sendPresenceUpdate('recording', m.chat);
+ sock.sendPresenceUpdate('recording', m.chat);
  console.log(chalk.black(chalk.bgWhite("[ SPIKE-AI ]")), color(argsLog, "turquoise"), chalk.magenta("From"), chalk.green(pushname), chalk.yellow(`[ ${m.sender.replace("@s.whatsapp.net", "")} ]`))
     } else if (m.isGroup) {
-  client.sendPresenceUpdate('recording', m.chat);
+  sock.sendPresenceUpdate('recording', m.chat);
       console.log(
         chalk.black(chalk.bgWhite("[ LOGS ]")),
         color(argsLog, "turquoise"),
