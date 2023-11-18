@@ -1,1 +1,1 @@
-web: node spike.js
+worker: node spike.js
