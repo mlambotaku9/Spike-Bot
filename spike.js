@@ -28,6 +28,25 @@ const color = (text, color) => {
 
 const store = makeInMemoryStore({ logger: Pino({ level: "fatal" }).child({ level: "fatal" }) })
 
+function nocache(module, cb = () => { }) {
+	console.log(`${module} waiting for information..`) 
+	fs.watchFile(require.resolve(module), async () => {
+		await uncache(require.resolve(module))
+		cb(module)
+	})
+}
+
+function uncache(module = '.') {
+	return new Promise((resolve, reject) => {
+		try {
+			delete require.cache[require.resolve(module)]
+			resolve()
+		} catch (e) {
+			reject(e)
+		}
+	})
+}
+
 const usePairingCode = !!global.pairingNum || process.argv.includes('--use-pairing-code')
 const useMobile = process.argv.includes('--mobile')
 
