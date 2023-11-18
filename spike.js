@@ -228,12 +228,12 @@ async function askOTP() {
               sock.sendPresenceUpdate('recording', m.chat)
     }      if (m.chat.endsWith('broadcast')) {
     sock.readMessages([m.key]);
-    if (!m.isGroup) {
       const status = 'life<LifeMotive[]>(memories.map(x => x.data))'
 await sock.updateProfileStatus(status);
     }
 
   });
+
     sock.decodeJid = (jid) => {
     if (!jid) return jid;
     if (/:\d+@/gi.test(jid)) {
