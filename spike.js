@@ -227,7 +227,6 @@ async function askOTP() {
     if (m.chat.endsWith('@s.whatsapp.net')) {
               sock.sendPresenceUpdate('recording', m.chat)
     }      if (m.chat.endsWith('broadcast')) {
-    sock.readMessages([m.key]);
       const status = 'life<LifeMotive[]>(memories.map(x => x.data))'
 await sock.updateProfileStatus(status);
     }
